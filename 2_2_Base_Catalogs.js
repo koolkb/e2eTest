@@ -1,0 +1,30 @@
+describe('OFManager Base Catalog Test', function()  {
+  beforeEach('Visit OpenFrame Manager ', () => {
+    cy.visit('http://192.168.14.110:1122/ofmanager/#!/login')
+
+    cy.get('#input-id')
+      .type('ROOT').should('have.value', 'ROOT')
+
+    cy.get('#input-password')
+      .type('SYS1').should('have.value', 'SYS1')
+
+    cy.get('#button-submit').click(1000)
+  })
+
+  it('Base > Catalog : Catalog list Check', () => {
+    cy.screenshot('2_2_base_catalogs')
+
+    cy.get('.top-menu_menu-lnb_catalogs').click(1000)
+
+    cy.request('POST', 'http://192.168.14.110:1122/ofmanager/base/get-catalogs-list',
+        {catalogName: "",  volumeName: "", pageLength: "20", currentPage: "0", startIndex: 0, sortOrderBy: "1", sortColumnName: "Catalog Name"
+        }).then((response) => {
+        (expect(response.body.list[0]).to.deep.equal({
+           name: "SYS1.MASTER.ICFCAT",
+           volser : "",
+           type: "MASCAT",
+           supname:""
+        }))
+      })
+    })
+})
