@@ -2,8 +2,10 @@ describe('OFManager Base Volume Test', function()  {
   beforeEach('Visit OpenFrame Manager', function() {
     cy.visit('http://192.168.14.110:1122/ofmanager/#!/login')
 
-    cy.get('#input-id').type('ROOT').should('have.value', 'ROOT')
-    cy.get('#input-password').type('SYS1').should('have.value', 'SYS1')
+    cy.get('#input-id')
+		.type('ROOT').should('have.value', 'ROOT')
+    cy.get('#input-password')
+		.type('SYS1').should('have.value', 'SYS1')
     cy.get('#button-submit').click(2000)
 
     cy.screenshot('2_1_base_volumes')

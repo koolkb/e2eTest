@@ -2,12 +2,8 @@ describe('OFManager Base Catalog Test', function()  {
   beforeEach('Visit OpenFrame Manager ', () => {
     cy.visit('http://192.168.14.110:1122/ofmanager/#!/login')
 
-    cy.get('#input-id')
-      .type('ROOT').should('have.value', 'ROOT')
-
-    cy.get('#input-password')
-      .type('SYS1').should('have.value', 'SYS1')
-
+    cy.get('#input-id').type('ROOT').should('have.value', 'ROOT')
+    cy.get('#input-password').type('SYS1').should('have.value', 'SYS1')
     cy.get('#button-submit').click(1000)
   
     cy.screenshot('2_2_base_catalogs')
